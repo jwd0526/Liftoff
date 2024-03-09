@@ -1,0 +1,14 @@
+.level-menu-container {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    height: 65vh;
+    width: 20%;
+    transform: translateY(10%);
+}
+
+
+.panel-img {
+    height: 100%;
+    width: 100%
+}

@@ -2,8 +2,7 @@ import React, { useReducer } from 'react';
 import './App.css';
 import Start from './Start';
 import LevelMenu from './LevelMenu';
-import rocketInactive from "./art/rocket-inactive.png";
-import play1 from "./art/Buttons/Play_Button_01.png";
+import Rocket from './Rocket/Rocket';
 
  export type State = {
   power: number;
@@ -16,6 +15,7 @@ import play1 from "./art/Buttons/Play_Button_01.png";
   coins: number;
   height: number;
   cost: number;
+  coinVal: number;
 };
 
 export type Action =
@@ -26,8 +26,8 @@ export type Action =
   | { type: "decreasePower" }
   | { type: "increaseForcefield" }
   | { type: "decreaseForcefield" }
-  | { type: "increaseCoin" }
-  | { type: "calculateCost"};
+  | { type: "calculateCost" }
+  | { type: "calculateValue" }
 
 const initialState: State = {
   power: 1,
@@ -40,20 +40,21 @@ const initialState: State = {
   coins: 10000,
   height: 0,
   cost: 0,
+  coinVal: 1,
 };
 
 function reducer(state: State, action: Action): State {
 
   switch (action.type) {
+      case "calculateValue":
+        return {
+          ...state,
+          coinVal: parseInt((((1 / (Math.pow(1.02, (state.points + state.powerPoints + state.capacityPoints + state.forcefieldPoints) * 50))) * state.height) + 1).toFixed(0))
+        }
       case "calculateCost":
       return {
         ...state,
         cost: parseInt(Math.pow(1.2, (state.points + state.capacityPoints + state.powerPoints + state.forcefieldPoints)).toFixed(0)),
-      }
-      case "increaseCoin":
-      return {
-        ...state,
-        coins: state.coins + parseInt(Math.pow(1.2, (state.height / (state.height * 0.9))).toFixed(0)),
       }
       case "increasePoint":
       return {
@@ -118,31 +119,15 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-const rocket = document.getElementById("rocket");
-const makeActive = () => {
-  rocket?.classList.add("rocket-active");
-  rocket?.classList.remove("rocket-inactive");
-}
-const makeInactive = () => {
-  rocket?.classList.add("rocket-inactive");
-  rocket?.classList.remove("rocket-active");
-}
+
 
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  window.onload = (() => {
-    dispatch({type: "calculateCost"});
-  });
   return (
     <div className="App">
       <Start />
-      <LevelMenu state={state} dispatch={dispatch}/>
-      <div className="rocket rocket-animate">
-          <img className="rocket-inactive" id="rocket" src={rocketInactive} alt="rocket" />
-      </div>
-      <div className="launch-button">
-          <img className="clickable-launch" src={play1} alt="launch-button" onClick={() => { makeActive() }}/>
-      </div>
+      <LevelMenu state={state} dispatch={dispatch} />
+      <Rocket levelState={state} levelDispatch={dispatch}/>
     </div>
   );
 }

@@ -9,13 +9,15 @@
 }
 
 body {
-
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column-reverse;
   margin: 0px;
   overflow-x: hidden;
 }
 
 .collapse {
-  transform: translateX(-19.2vw);
+  transform: translateX(-22vw);
   transition-duration: 1s;
 }
 
@@ -27,66 +29,5 @@ body {
   visibility: hidden;
 }
 
-.launch-button {
-  position: absolute;
-  left: 47.5vw;
-  height: 10vh;
-  bottom: 7%; /* Adjust as needed */
-}
 
-.clickable-launch {
-  height: 100%
-}
 
-.clickable-launch:hover {
-  content: url('./art/Buttons/Play_Button_02.png');
-  cursor: pointer;
-}
-
-.clickable-launch:active {
-  content: url('./art/Buttons/Play_Button_03.png');
-}
-
-.rocket {
-  position: absolute;
-  bottom: 0;
-  height: 18vh;
-  width: 6vw;
-  bottom: 26.8vh;
-  left: 47vw;
-  z-index: 0;
-}
-
-.animate {
-  animation: land-rocket 4s linear 1;
-}
-
-.rocket-active {
-  content: url("./art/rocket-active.png");
-  height: 100%;
-  width: 100%;
-}
-
-.rocket-inactive {
-  content: url("./art/rocket-inactive.png");
-  height: 100%;
-  width: 100%;
-}
-
-@keyframes land-rocket {
-  0% {
-      transform: translateY(-70vh);
-  }
-  25% {
-      transform: translateY(-45vh);
-  }
-  50% {
-      transform: translateY(-25vh);
-  }
-  75% {
-      transform: translateY(-10vh);
-  }
-  100% {
-      transform: translateY(0vh);
-  }
-}

@@ -1,0 +1,85 @@
+.rocket-box {
+    position: absolute;
+    bottom: 26.8vh; /* Adjust as needed */
+    height: 18vh;
+    width: 6vw;
+    left: 47vw;
+    z-index: 0;
+  }
+
+  .rocket-img {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .rocket-active {
+    content: url("../art/rocket-active.png");
+  }
+  
+  .rocket-inactive {
+    content: url("../art/rocket-inactive.png");
+  }
+
+  .launch-button {
+    z-index: 1;
+    position: absolute;
+    left: 47.5vw;
+    height: 10vh;
+    bottom: 7%; /* Adjust as needed */
+  }
+  
+  .clickable-launch {
+    height: 100%
+  }
+  
+  .clickable-launch:hover {
+    content: url('../art/Buttons/Play_Button_02.png');
+    cursor: pointer;
+  }
+  
+  .clickable-launch:active {
+    content: url('../art/Buttons/Play_Button_03.png');
+  }
+
+  .animate {
+    animation: land-rocket 4s linear 1;
+  }
+
+  .falling-and-spinning {
+    animation-name: fallAndSpin;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes fallAndSpin {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+      animation-timing-function: cubic-bezier(0.33333, 0.66667, 0.66667, 1);
+    }
+    50% {
+      transform: translateY(-500px) translateX(0) rotate(5deg);
+      animation-timing-function: cubic-bezier(0.33333, 0, 0.66667, 0.33333);
+    }
+    100% {
+      transform: translateY(400px) translateX(100px) rotate(180deg);
+    }
+  }
+  @keyframes land-rocket {
+    0% {
+        transform: translateY(-70vh);
+    }
+    25% {
+        transform: translateY(-45vh);
+    }
+    50% {
+        transform: translateY(-25vh);
+    }
+    75% {
+        transform: translateY(-10vh);
+    }
+    100% {
+        transform: translateY(0vh);
+    }
+  }

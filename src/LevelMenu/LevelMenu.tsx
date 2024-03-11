@@ -83,6 +83,10 @@ const LevelMenu : React.FC<Props> = ({ state, dispatch }) => {
                             dispatch({ type:"increasePoint" });
                         }}>Buy Point</button>
                         <h2 className="cost-header">Cost: {state.cost}</h2>
+                        <div className="coin-img-box">
+                            <img className="coin-img" src={coinIcon} alt="coin-icon"/>
+                        </div>
+
                     </div>
                 </div>
             </div>

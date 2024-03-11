@@ -163,12 +163,16 @@
     text-wrap: nowrap;
     color: rgb(10, 20, 70);
     background: #576ddb;
-    padding: 3% 10% 3% 10%;
+    padding: 3% 6% 3% 6%;
     font-family: 'Welbut';
     font-size: 18px;
     border: 3px outset rgb(17, 35, 112);
     border-radius: 5px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .4); 
+}
+
+.cost-header {
+    font-size: 20px;
 }
 
 .buy-point:hover {

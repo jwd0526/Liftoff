@@ -22,10 +22,10 @@
 
   .launch-button {
     z-index: 1;
-    position: absolute;
+    position: relative;
     left: 47.5vw;
     height: 10vh;
-    bottom: 7%; /* Adjust as needed */
+    margin-top: -7%;
   }
   
   .clickable-launch {

@@ -1,10 +1,10 @@
-import React, { useReducer } from 'react';
-import './App.css';
-import Start from './Start';
-import LevelMenu from './LevelMenu';
-import Rocket from './Rocket/Rocket';
+import React, { useReducer } from "react";
+import "./App.css";
+import Start from "./Start";
+import LevelMenu from "./LevelMenu";
+import Rocket from "./Rocket/Rocket";
 
- export type State = {
+export type State = {
   power: number;
   capacity: number;
   forcefield: number;
@@ -27,7 +27,7 @@ export type Action =
   | { type: "increaseForcefield" }
   | { type: "decreaseForcefield" }
   | { type: "calculateCost" }
-  | { type: "calculateValue" }
+  | { type: "calculateValue" };
 
 const initialState: State = {
   power: 1,
@@ -44,82 +44,117 @@ const initialState: State = {
 };
 
 function reducer(state: State, action: Action): State {
-
   switch (action.type) {
-      case "calculateValue":
-        return {
-          ...state,
-          coinVal: parseInt((((1 / (Math.pow(1.02, (state.points + state.powerPoints + state.capacityPoints + state.forcefieldPoints) * 50))) * state.height) + 1).toFixed(0))
-        }
-      case "calculateCost":
+    case "calculateValue":
       return {
         ...state,
-        cost: parseInt(Math.pow(1.2, (state.points + state.capacityPoints + state.powerPoints + state.forcefieldPoints)).toFixed(0)),
-      }
-      case "increasePoint":
-      return {
-          ...state,
-          cost: parseInt(Math.pow(1.2, (state.points + state.capacityPoints + state.powerPoints + state.forcefieldPoints)).toFixed(0)),
-          coins: state.coins - state.cost,
-          points: state.points + 1,
-      }
-      case "increaseCapacity":
-      return {
-          ...state,
-          points: state.points - 1,
-          capacityPoints: state.capacityPoints + 1,
-          capacity: parseFloat(Math.pow(1.3, (state.capacityPoints + 1) / 2).toFixed(2))
+        coinVal: parseInt(
+          (
+            (1 /
+              Math.pow(
+                1.02,
+                (state.points +
+                  state.powerPoints +
+                  state.capacityPoints +
+                  state.forcefieldPoints) *
+                  50
+              )) *
+              state.height +
+            1
+          ).toFixed(0)
+        ),
       };
-      case "decreaseCapacity":
+    case "calculateCost":
+      return {
+        ...state,
+        cost: parseInt(
+          Math.pow(
+            1.2,
+            state.points +
+              state.capacityPoints +
+              state.powerPoints +
+              state.forcefieldPoints
+          ).toFixed(0)
+        ),
+      };
+    case "increasePoint":
+      return {
+        ...state,
+        cost: parseInt(
+          Math.pow(
+            1.2,
+            state.points +
+              state.capacityPoints +
+              state.powerPoints +
+              state.forcefieldPoints
+          ).toFixed(0)
+        ),
+        coins: state.coins - state.cost,
+        points: state.points + 1,
+      };
+    case "increaseCapacity":
+      return {
+        ...state,
+        points: state.points - 1,
+        capacityPoints: state.capacityPoints + 1,
+        capacity: parseFloat(
+          Math.pow(1.3, (state.capacityPoints + 1) / 2).toFixed(2)
+        ),
+      };
+    case "decreaseCapacity":
       if (state.capacityPoints > 0) {
-          return {
+        return {
           ...state,
           points: state.points + 1,
           capacityPoints: state.capacityPoints - 1,
-          capacity: parseFloat(Math.pow(1.3, (state.capacityPoints - 1) / 2).toFixed(2))
-          };
+          capacity: parseFloat(
+            Math.pow(1.3, (state.capacityPoints - 1) / 2).toFixed(2)
+          ),
+        };
       }
       return state;
-      case "increasePower":
+    case "increasePower":
       return {
-          ...state,
-          points: state.points - 1,
-          powerPoints: state.powerPoints + 1,
-          power: parseFloat(Math.pow(1.2, (state.powerPoints + 1) / 2).toFixed(2))
+        ...state,
+        points: state.points - 1,
+        powerPoints: state.powerPoints + 1,
+        power: parseFloat(
+          Math.pow(1.2, (state.powerPoints + 1) / 2).toFixed(2)
+        ),
       };
-      case "decreasePower":
+    case "decreasePower":
       if (state.powerPoints > 0) {
-          return {
+        return {
           ...state,
           points: state.points + 1,
           powerPoints: state.powerPoints - 1,
-          power: parseFloat(Math.pow(1.2, (state.powerPoints - 1) / 2).toFixed(2))
-          };
+          power: parseFloat(
+            Math.pow(1.2, (state.powerPoints - 1) / 2).toFixed(2)
+          ),
+        };
       }
       return state;
-      case "increaseForcefield":
+    case "increaseForcefield":
       return {
-          ...state,
-          points: state.points - 1,
-          forcefieldPoints: state.forcefieldPoints + 1,
-          forcefield: state.forcefield + 10,
+        ...state,
+        points: state.points - 1,
+        forcefieldPoints: state.forcefieldPoints + 1,
+        forcefield: state.forcefield + 10,
       };
-      case "decreaseForcefield":
+    case "decreaseForcefield":
       if (state.forcefieldPoints > 0) {
-          return {
+        return {
           ...state,
           points: state.points + 1,
           forcefieldPoints: state.forcefieldPoints - 1,
-          forcefield: state.forcefield -10 ,
-          };
+          forcefield: state.forcefield - 10,
+        };
       }
       return state;
-      default:
+    default:
       return state;
   }
 }
-
-
 
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -127,9 +162,9 @@ const App: React.FC = () => {
     <div className="App">
       <Start />
       <LevelMenu state={state} dispatch={dispatch} />
-      <Rocket levelState={state} levelDispatch={dispatch}/>
+      <Rocket levelState={state} levelDispatch={dispatch} />
     </div>
   );
-}
+};
 
 export default App;

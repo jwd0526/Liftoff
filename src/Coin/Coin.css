@@ -1,0 +1,12 @@
+.coin-box {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: url("../art/coin.png");
+    animation: sprite .5s steps(9) infinite;
+    z-index: 4;
+}
+
+@keyframes sprite {
+    100% { background-position: -540px;}
+}

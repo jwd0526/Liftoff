@@ -48,21 +48,7 @@ function reducer(state: State, action: Action): State {
     case "calculateValue":
       return {
         ...state,
-        coinVal: parseInt(
-          (
-            (1 /
-              Math.pow(
-                1.02,
-                (state.points +
-                  state.powerPoints +
-                  state.capacityPoints +
-                  state.forcefieldPoints) *
-                  50
-              )) *
-              state.height +
-            1
-          ).toFixed(0)
-        ),
+        coinVal: parseInt((Math.pow(state.height / 800, 5 / 3) + 1).toFixed(0)),
       };
     case "calculateCost":
       return {

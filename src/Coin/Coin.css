@@ -1,12 +1,69 @@
 .coin-box {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background-image: url("../art/coin.png");
-    animation: sprite .5s steps(9) infinite;
-    z-index: 4;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image: url("../art/coin.png");
+  animation: sprite 0.5s steps(9) infinite;
+  z-index: 3;
+}
+
+.indicator {
+  position: absolute;
+  width: 52px;
+  height: 54px;
+  background-image: url("../art/coinIndicator.png");
+  opacity: 1;
+  z-index: 4;
+  animation: fade-in 0.5s linear forwards;
+}
+
+.ended {
+  animation: fade-out 2s linear forwards;
+}
+
+.collected-coin {
+  animation-name: fallAndSpinandFade;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes sprite {
-    100% { background-position: -540px;}
+  100% {
+    background-position: -540px;
+  }
+}
+
+@keyframes fallAndSpinandFade {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.33333, 0.66667, 0.66667, 1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) translateX(0) rotate(5deg);
+    animation-timing-function: cubic-bezier(0.33333, 0, 0.66667, 0.33333);
+  }
+  a 100% {
+    transform: translateY(300px) translateX(100px) rotate(180deg);
+    opacity: 0;
+  }
 }

@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Welbut";
-  src: local("Wellbut"),
+  src:
+    local("Wellbut"),
     url("./fonts/Welbut__.ttf") format("truetype");
 }
 
@@ -9,7 +10,7 @@
 }
 
 body {
-  overflow-y: show;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column-reverse;
   margin: 0px;
@@ -22,7 +23,6 @@ body {
   width: 100vw;
   z-index: 3;
   background: transparent;
-
 }
 
 .collapse {
@@ -37,6 +37,3 @@ body {
 .hidden {
   visibility: hidden;
 }
-
-
-

@@ -1,0 +1,70 @@
+.end-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: hsla(0, 0%, 0%, 0.7);
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+}
+
+.end-menu {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 18vw;
+  height: 18vw;
+  align-items: center;
+  background-image: url("../art/Buttons/panels/level-up-panel.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.end-header {
+  position: relative;
+  margin: 10% auto 5% auto;
+}
+
+.end-text-div {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.end-text {
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  padding: 3% 7% 3% 7%;
+}
+
+.end-label,
+.end-value {
+  margin: 0;
+}
+
+.end-label {
+  margin-right: auto;
+}
+
+.restart-button {
+  width: 144px;
+  height: 48px;
+  background-image: url("../art/Buttons/Text_Restart_Button_01.png");
+  background-size: 100%;
+}
+
+.restart-button:hover {
+  background-image: url("../art/Buttons/Text_Restart_Button_02.png");
+  cursor: pointer;
+}
+
+.restart-button:active {
+  background-image: url("../art/Buttons/Text_Restart_Button_03.png");
+}

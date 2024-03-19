@@ -27,7 +27,7 @@ export type Action =
   | { type: "increaseForcefield" }
   | { type: "decreaseForcefield" }
   | { type: "calculateCost" }
-  | { type: "calculateValue" };
+  | { type: "addCoins" };
 
 const initialState: State = {
   power: 1,
@@ -45,7 +45,7 @@ const initialState: State = {
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case "calculateValue":
+    case "addCoins":
       return {
         ...state,
         coinVal: parseInt((Math.pow(state.height / 800, 5 / 3) + 1).toFixed(0)),

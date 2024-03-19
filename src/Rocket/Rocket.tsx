@@ -6,6 +6,7 @@ import statsPanel from "../art/Buttons/panels/stats-panel.png";
 import "./Rocket.css";
 import { State, Action } from "../App";
 import Coin from "../Coin";
+import EndScreen from "../EndScreen";
 
 // Define props interface for Rocket component
 interface RocketProps {
@@ -35,9 +36,9 @@ const Rocket: React.FC<RocketProps> = ({ levelState, levelDispatch }) => {
   const [coins, setCoins] = useState<{ leftVal: number; velocity: number }[]>(
     []
   );
-  const [coinSpeed, setCoinSpeed] = useState<number>(5);
   const [maxSpeed, setMaxSpeed] = useState<number>(20);
   const [collectedCoins, setCollectedCoins] = useState<number>(0);
+  const [isEnded, setEnded] = useState<boolean>(false);
 
   // Update max speed when power points change
   useEffect(() => {
@@ -138,6 +139,7 @@ const Rocket: React.FC<RocketProps> = ({ levelState, levelDispatch }) => {
         const rocketImage = document.getElementById("rockImg");
         rocketImage?.classList.add("rocket-inactive");
         rocketImage?.classList.remove("rocket-active");
+        setEnded(true); // promts endScreen
       } else {
         setFuel((prevFuel) => prevFuel + 1 / (levelState.powerPoints / 10 + 1));
       }
@@ -153,15 +155,10 @@ const Rocket: React.FC<RocketProps> = ({ levelState, levelDispatch }) => {
       }
     };
 
-    const updateCoinSpeed = () => {
-      const newCoinSpeed = speed;
-      setCoinSpeed(newCoinSpeed);
-    };
-
     const updateCoins = () => {
       const rand = Math.round(Math.random() * 50);
       if (launched && rand === 3 && height / 10 > 200) {
-        const newLeftVal = Math.floor(Math.random() * 100);
+        const newLeftVal = Math.floor(Math.random() * 98);
         setCoins((prevCoins) => {
           const newCoin = {
             leftVal: newLeftVal,
@@ -178,9 +175,6 @@ const Rocket: React.FC<RocketProps> = ({ levelState, levelDispatch }) => {
 
       for (let i = 0; i < coins.length; i++) {
         var coinHitbox: DOMRect | null = coins[i].getBoundingClientRect();
-        // Now you have the bounding client rectangle for the current coin element
-        // You can perform collision detection logic here
-        // For example:
         if (
           rocketHitbox &&
           rocketHitbox.x < coinHitbox.x + coinHitbox.width &&
@@ -203,7 +197,6 @@ const Rocket: React.FC<RocketProps> = ({ levelState, levelDispatch }) => {
       updateSpeed();
       updateBackgroundProgress();
       updateFuelAndHeight();
-      updateCoinSpeed();
       updateCoins();
       manageCollisions();
     };
@@ -228,9 +221,18 @@ const Rocket: React.FC<RocketProps> = ({ levelState, levelDispatch }) => {
     coins,
   ]);
 
+  const startOver = () => {
+    setEnded(false);
+  };
   // Render Rocket component
   return (
     <>
+      <EndScreen
+        coins={collectedCoins}
+        height={height}
+        visible={isEnded}
+        startOver={startOver}></EndScreen>
+
       <div className="launch-button">
         <img
           src={playButton}
